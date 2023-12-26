@@ -49,7 +49,7 @@ void Game::resizeBackgroundImage(float windowWidth, float windowHeight) {
     float scaleY = static_cast<float>(windowHeight) / backgroundSprite.getLocalBounds().height;
 
     // Set the scale to cover the window
-    // Center tha imag in the view
+    // Center the image in the view
     backgroundSprite.setScale(std::max(scaleX,scaleY),std::max(scaleX,scaleY));
     backgroundSprite.setPosition({float(windowWidth) / 2 - backgroundSprite.getGlobalBounds().width / 2,
                                   float(windowHeight) / 2 - backgroundSprite.getGlobalBounds().height / 2});
