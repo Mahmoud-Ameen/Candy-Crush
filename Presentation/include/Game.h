@@ -3,6 +3,7 @@
 
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
+#include "GameFrame.h"
 
 /*
  * Main Class Responsible for App Display and Behavior
@@ -24,7 +25,8 @@ private:
     sf::Sprite backgroundSprite;
     void resizeBackgroundImage(float windowWidth, float windowHeight);
 
-    //
+    // Game Frame
+    GameFrame* gameFrame;
 };
 
 

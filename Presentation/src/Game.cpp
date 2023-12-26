@@ -1,7 +1,8 @@
 #include "Game.h"
+#include "GameFrame.h"
 #include <iostream>
 
-Game::Game() {
+Game::Game(){
     // Initialize window
     window = new sf::RenderWindow(sf::VideoMode(1200,800),"Candy Crush");
     window->setFramerateLimit(60);
@@ -13,9 +14,13 @@ Game::Game() {
     }
     backgroundSprite.setTexture(backgroundImage);
     resizeBackgroundImage(float(window->getSize().x),float(window->getSize().y));
+
+    // Create Game Frame
+    gameFrame = new GameFrame(window);
 }
 
 void Game::update(const sf::Time &dt) {
+
     sf::Event ev{};
     while(window->pollEvent(ev)){
         if(ev.type == sf::Event::Closed) window->close();
@@ -29,13 +34,19 @@ void Game::update(const sf::Time &dt) {
                                                    static_cast<float>(window->getSize().x),
                                                    static_cast<float>(window->getSize().y))));
 
+            // Inform Widgets about the event
+            gameFrame->handleEvent(ev);
         }
     }
+
+    // Update Widgets
+    gameFrame->update(dt);
 }
 
 void Game::render() {
     window->clear();
     window->draw(backgroundSprite);
+    gameFrame->render();
     window->display();
 }
 
