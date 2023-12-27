@@ -3,6 +3,7 @@
 #define CANDYCRUSH_GAMEFRAME_H
 
 #include <SFML/Graphics.hpp>
+#include "PageManager.h"
 
 /**
  * @brief The GameFrame class represents the central frame/widget where screens(pages) would be rendered.
@@ -45,6 +46,8 @@ private:
      * Adjusts the scale and position of the GameFrame sprite when the render target is resized.
      */
     void handleResize();
+
+    PageManager pageManager;
 };
 
 

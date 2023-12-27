@@ -1,7 +1,10 @@
 #include "GameFrame.h"
 
 
-GameFrame::GameFrame(sf::RenderTarget *renderTarget): renderTarget(renderTarget) {
+GameFrame::GameFrame(sf::RenderTarget *renderTarget):
+        renderTarget(renderTarget),
+        pageManager(&renderTexture)
+{
     renderTexture.create(initialWidth, initialHeight);
     gameFrameTexture = renderTexture.getTexture();
     gameFrameSprite.setTexture(gameFrameTexture);
@@ -9,14 +12,19 @@ GameFrame::GameFrame(sf::RenderTarget *renderTarget): renderTarget(renderTarget)
 }
 
 void GameFrame::render() {
-    // Render content of the frame
+    // render page content to the frame
+    pageManager.renderPage();
+
+    // Draw the frame
     gameFrameTexture = renderTexture.getTexture();
     gameFrameSprite.setTexture(gameFrameTexture);
     renderTarget->draw(gameFrameSprite);
 }
 
-void GameFrame::update(sf::Time) {
+void GameFrame::update(sf::Time dt) {
     // Update content of the frame
+    pageManager.updatePage(dt);
+
     renderTexture.clear();
     renderTexture.display();
 }
@@ -25,6 +33,7 @@ void GameFrame::handleEvent(const sf::Event &ev) {
     if(ev.type == sf::Event::Resized){
         handleResize();
     }
+    pageManager.handleEvent(ev);
 }
 
 void GameFrame::handleResize() {
