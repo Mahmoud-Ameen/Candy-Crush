@@ -47,7 +47,7 @@ private:
      */
     void handleResize();
 
-    PageManager pageManager;
+    PageManager* pageManager;
 };
 
 

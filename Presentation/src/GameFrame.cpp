@@ -2,18 +2,20 @@
 
 
 GameFrame::GameFrame(sf::RenderTarget *renderTarget):
-        renderTarget(renderTarget),
-        pageManager(&renderTexture)
+        renderTarget(renderTarget)
 {
     renderTexture.create(initialWidth, initialHeight);
     gameFrameTexture = renderTexture.getTexture();
     gameFrameSprite.setTexture(gameFrameTexture);
     handleResize();
+
+    // Initialize PageManager
+    pageManager = new PageManager(&renderTexture);
 }
 
 void GameFrame::render() {
     // render page content to the frame
-    pageManager.renderPage();
+    pageManager->renderPage();
 
     // Draw the frame
     gameFrameTexture = renderTexture.getTexture();
@@ -23,7 +25,7 @@ void GameFrame::render() {
 
 void GameFrame::update(sf::Time dt) {
     // Update content of the frame
-    pageManager.updatePage(dt);
+    pageManager->updatePage(dt);
 
     renderTexture.clear();
     renderTexture.display();
@@ -33,7 +35,7 @@ void GameFrame::handleEvent(const sf::Event &ev) {
     if(ev.type == sf::Event::Resized){
         handleResize();
     }
-    pageManager.handleEvent(ev);
+    pageManager->handleEvent(ev);
 }
 
 void GameFrame::handleResize() {
