@@ -48,7 +48,7 @@ public:
      */
     void setActive(bool active) { isActive = active;};
 
-private:
+protected:
     sf::RenderTarget* renderTarget;
     std::vector<Widget*> widgets; ///< The collection of widgets on the page.
     bool isActive;

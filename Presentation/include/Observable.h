@@ -35,7 +35,7 @@ public:
         }
     }
 
-private:
+protected:
     std::vector<Observer*> observers;
 };
 
