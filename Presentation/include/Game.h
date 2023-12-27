@@ -21,7 +21,7 @@ private:
     sf::RenderWindow* window;
 
     // BackgroundImage
-    std::string backgroundImagePath = "../assets/BOOT-background_1.jpg";
+    std::string backgroundImagePath = "../assets/background_2.jpg";
     BackgroundImage* backgroundImage;
 
     // Game Frame

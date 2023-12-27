@@ -36,9 +36,13 @@ void Game::update(const sf::Time &dt) {
 }
 
 void Game::render() {
+    // Clear window
     window->clear();
+
+    // Render Components
     backgroundImage->render(window);
     gameFrame->render();
+
     window->display();
 }
 

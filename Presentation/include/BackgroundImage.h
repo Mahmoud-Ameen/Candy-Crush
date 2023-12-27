@@ -54,7 +54,7 @@ public:
         // Center the image in the view
         sprite.setScale(std::max(scaleX,scaleY),std::max(scaleX,scaleY));
         sprite.setPosition({float(targetWidth) / 2 - sprite.getGlobalBounds().width / 2,
-                                      float(targetHeight) / 2 - sprite.getGlobalBounds().height / 2});
+                                      float(targetHeight) - sprite.getGlobalBounds().height});
     }
 
 private:
