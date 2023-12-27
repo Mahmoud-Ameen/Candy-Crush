@@ -44,6 +44,8 @@ public:
      * @param targetHeight The target height to cover.
      */
     void handleImageResize(float targetWidth, float targetHeight) {
+        if(targetHeight == 0 || targetWidth == 0) return;
+
         // Calculate the scale needed to cover the entire window
         float scaleX = static_cast<float>(targetWidth) / sprite.getLocalBounds().width;
         float scaleY = static_cast<float>(targetHeight) / sprite.getLocalBounds().height;
