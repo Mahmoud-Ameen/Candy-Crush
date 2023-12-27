@@ -4,6 +4,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include "GameFrame.h"
+#include "BackgroundImage.h"
 
 /*
  * Main Class Responsible for App Display and Behavior
@@ -21,9 +22,7 @@ private:
 
     // BackgroundImage
     std::string backgroundImagePath = "../assets/BOOT-background_1.jpg";
-    sf::Texture backgroundImage;
-    sf::Sprite backgroundSprite;
-    void resizeBackgroundImage(float windowWidth, float windowHeight);
+    BackgroundImage* backgroundImage;
 
     // Game Frame
     GameFrame* gameFrame;
