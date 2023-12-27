@@ -47,6 +47,9 @@ public:
      */
     virtual sf::Rect<float>  getGlobalBounds() = 0;
 
+    void setHovered(bool hovered){isHovered = hovered;}
+protected:
+    bool isHovered = false;
 };
 
 #endif //CANDYCRUSH_WIDGET_H

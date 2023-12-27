@@ -1,9 +1,10 @@
 #include "PageManager.h"
+#include "pages/welcomePage/WelcomePage.h"
 
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "ConstantConditionsOC"
 PageManager::PageManager(sf::RenderTarget *renderTarget) : renderTarget(renderTarget){
-    // Initialize Pages
+    auto welcomePage = new WelcomePage(renderTarget);
+    addPage(welcomePage);
+    switchToPage(0);
 }
 
 void PageManager::addPage(Page* page) {
@@ -31,13 +32,16 @@ void PageManager::updatePage(const sf::Time &dt) {
     }
 }
 
-void PageManager::handleEvent(const sf::Event &event) {
-//    pages[currentPageIndex]->handleEvent(event);
+void PageManager::handleEvent(const sf::Event &event, const sf::Vector2f &originCoords,
+                              const sf::Vector2f &mousePositionInView,
+                              float scaleFactor) {
+    pages[currentPageIndex]->handleEvent(event, originCoords, mousePositionInView, scaleFactor);
 }
 
 
 void PageManager::onEvent(const std::string &eventName) {
-// Handle events triggered by pages
+    // Handle events triggered by pages
+    if(eventName == "startButtonClicked"){
+        std::cout << "Switching to Levels' Page\n";
+    }
 }
-
-#pragma clang diagnostic pop

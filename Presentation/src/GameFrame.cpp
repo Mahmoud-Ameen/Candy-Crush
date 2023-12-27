@@ -1,8 +1,8 @@
 #include "GameFrame.h"
 
 
-GameFrame::GameFrame(sf::RenderTarget *renderTarget):
-        renderTarget(renderTarget)
+GameFrame::GameFrame(sf::RenderWindow *renderWindow):
+        renderWindow(renderWindow)
 {
     renderTexture.create(initialWidth, initialHeight);
     gameFrameTexture = renderTexture.getTexture();
@@ -19,15 +19,16 @@ void GameFrame::render() {
 
     // Draw the frame
     gameFrameTexture = renderTexture.getTexture();
+    gameFrameTexture.setSmooth(true);
     gameFrameSprite.setTexture(gameFrameTexture);
-    renderTarget->draw(gameFrameSprite);
+    renderWindow->draw(gameFrameSprite);
 }
 
 void GameFrame::update(sf::Time dt) {
     // Update content of the frame
     pageManager->updatePage(dt);
 
-    renderTexture.clear();
+    renderTexture.clear(sf::Color::Magenta);
     renderTexture.display();
 }
 
@@ -35,14 +36,18 @@ void GameFrame::handleEvent(const sf::Event &ev) {
     if(ev.type == sf::Event::Resized){
         handleResize();
     }
-    pageManager->handleEvent(ev);
+
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*renderWindow);
+    sf::Vector2f mousePositionInView = renderWindow->mapPixelToCoords(mousePosition);
+
+    pageManager->handleEvent(ev, gameFrameSprite.getPosition(), mousePositionInView, scaleFactor);
 }
 
 void GameFrame::handleResize() {
 
-    unsigned int newHeight = renderTarget->getSize().y;
-    unsigned int newWidth = renderTarget->getSize().x;
-    float scaleFactor = (float)newHeight / gameFrameSprite.getLocalBounds().height;
+    unsigned int newHeight = renderWindow->getSize().y;
+    unsigned int newWidth = renderWindow->getSize().x;
+    scaleFactor = (float)newHeight / gameFrameSprite.getLocalBounds().height;
 
     gameFrameSprite.setScale(scaleFactor,scaleFactor);
     gameFrameSprite.setPosition({static_cast<float>((float)newWidth / 2 - (float)gameFrameSprite.getGlobalBounds().width / 2),

@@ -27,18 +27,27 @@ public:
     void updatePage(const sf::Time &dt);
 
     /**
-     * @brief Handles an SFML event, delegating it to the current page.
-     *
-     * @param event The SFML event to be handled.
-     */
-    void handleEvent(const sf::Event& event);
-
-    /**
      * @brief Overrides the onEvent method to respond to events triggered by pages.
      *
      * @param eventName The name or identifier of the event.
      */
     void onEvent(const std::string& eventName) override;
+
+    /**
+     * @brief Handles an SFML event, delegating it to the current page.
+     *
+     * @param event The SFML event to be handled.
+     * @param originCoords         The coordinates of the origin of the rendering area.
+     * @param mousePositionInView  The current mouse position in view coordinates.
+     * @param scaleFactor          The scaling factor applied to the rendering area,
+     *                             affecting the interpretation of coordinates.
+     *
+     * @note Depending on the implementation of the current page, the provided parameters
+     *       are used to determine how the event should be processed and interacted with
+     *       the page's elements.
+     */
+    void handleEvent(const sf::Event &event, const sf::Vector2f &originCoords, const sf::Vector2f &mousePositionInView,
+                     float scaleFactor);
 
 private:
     sf::RenderTarget* renderTarget; // Render target to draw the pages on

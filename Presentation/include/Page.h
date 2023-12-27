@@ -35,11 +35,20 @@ public:
     virtual void update(const sf::Time& dt) = 0;
 
     /**
-     * @brief Handles events related to the page.
+     * @brief Handles an SFML event, delegating it to the current page.
      *
-     * @param ev The event to be handled.
+     * @param ev The SFML event to be handled.
+     * @param originCoords         The coordinates of the origin of the rendering area.
+     * @param mousePositionInView  The current mouse position in view coordinates.
+     * @param scaleFactor          The scaling factor applied to the rendering area,
+     *                             affecting the interpretation of coordinates.
+     *
+     * @note Depending on the implementation of the current page, the provided parameters
+     *       are used to determine how the event should be processed and interacted with
+     *       the page's elements.
      */
-    virtual void handleEvent(const sf::Event&) = 0;
+     virtual void handleEvent(const sf::Event &ev, const sf::Vector2f &originCoords, const sf::Vector2f &mousePositionInView,
+                float scaleFactor) = 0;
 
     /**
      * @brief Sets the activation state of the page.
@@ -52,6 +61,10 @@ protected:
     sf::RenderTarget* renderTarget;
     std::vector<Widget*> widgets; ///< The collection of widgets on the page.
     bool isActive;
+
+    void addWidget(Widget* widget){
+        widgets.push_back(widget);
+    };
 };
 
 

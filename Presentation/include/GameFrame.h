@@ -12,7 +12,7 @@
  */
 class GameFrame {
 public:
-    explicit GameFrame(sf::RenderTarget *renderTarget);
+    explicit GameFrame(sf::RenderWindow *renderWindow);
     /**
      * @brief Renders the GameFrame onto the specified render target.
      */
@@ -31,7 +31,7 @@ public:
     void handleEvent(const sf::Event &ev);
 
 private:
-    sf::RenderTarget* renderTarget; ///< The render target on which the GameFrame is drawn.
+    sf::RenderWindow* renderWindow; ///< The render target on which the GameFrame is drawn.
 
     sf::RenderTexture renderTexture; ///< The render texture used for drawing the GameFrame.
     sf::Texture gameFrameTexture;    ///< The texture containing the GameFrame content.
@@ -39,6 +39,7 @@ private:
 
     unsigned int initialHeight = 800;
     unsigned int initialWidth = 600;
+    float scaleFactor = 1;
 
     /**
      * @brief Handles resizing of the GameFrame.
