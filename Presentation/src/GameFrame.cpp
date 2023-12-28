@@ -11,6 +11,7 @@ GameFrame::GameFrame(sf::RenderWindow *renderWindow):
 
     // Initialize PageManager
     pageManager = new PageManager(&renderTexture);
+    pageManager->addObserver(this);
 }
 
 void GameFrame::render() {
@@ -52,4 +53,8 @@ void GameFrame::handleResize() {
     gameFrameSprite.setScale(scaleFactor,scaleFactor);
     gameFrameSprite.setPosition({static_cast<float>((float)newWidth / 2 - (float)gameFrameSprite.getGlobalBounds().width / 2),
                                         0});
+}
+
+void GameFrame::onEvent(const std::string &eventName) {
+
 }

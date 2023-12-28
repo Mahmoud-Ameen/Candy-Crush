@@ -10,7 +10,7 @@
  * This class manages switching between pages, rendering the current page,
  * updating the current page, and handling events.
  */
-class PageManager: public Observer {
+class PageManager: public Observer, public Observable {
 public:
     explicit PageManager(sf::RenderTarget* renderTarget);
 

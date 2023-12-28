@@ -10,7 +10,7 @@
  *
  * This frame has a fixed aspect ratio and is drawn onto a specified render target.
  */
-class GameFrame {
+class GameFrame: public Observer {
 public:
     explicit GameFrame(sf::RenderWindow *renderWindow);
     /**
@@ -30,6 +30,7 @@ public:
      */
     void handleEvent(const sf::Event &ev);
 
+    void onEvent(const std::string &eventName) override;
 private:
     sf::RenderWindow* renderWindow; ///< The render target on which the GameFrame is drawn.
 

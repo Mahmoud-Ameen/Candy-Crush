@@ -1,8 +1,9 @@
 #include <iostream>
-#include "pages/welcomePage/StartButton.h"
+#include <cmath>
+#include "pages/levelsPage/LevelButton.h"
 
 
-StartButton::StartButton(){
+LevelButton::LevelButton(int levelNumber): levelNumber(levelNumber){
     // Load Image
     if (!texture.loadFromFile(imagePath)) {
         std::cerr << "Error loading image from file: " << imagePath << std::endl;
@@ -14,45 +15,49 @@ StartButton::StartButton(){
         std::cerr << "Error loading font from file: " << fontPath << std::endl;
     }
     textObject.setFont(font);
-    textObject.setString(text);
-    textObject.setCharacterSize(48);
+    textObject.setString("Level " + std::to_string(levelNumber));
+    textObject.setCharacterSize(40);
     textObject.setStyle(sf::Text::Bold);
     textObject.setFillColor(sf::Color::Black);
 
 }
 
-void StartButton::render(sf::RenderTarget* renderTarget) {
+void LevelButton::render(sf::RenderTarget* renderTarget) {
 
+    const int padding = 15;
     sprite.setPosition({(float)renderTarget->getSize().x / 2 - sprite.getGlobalBounds().width / 2,
-                        (float)renderTarget->getSize().y / 2.f });
+                        padding + (float)(sprite.getGlobalBounds().height+padding) * float(levelNumber-1) });
     setTextPosition();
 
-    if(isHovered)
+    if(isHovered) {
         sprite.setColor({255, 255, 255, 240});
-    else
-        sprite.setColor({255,255,255,255});
+        notifyObservers("clickableHovered");
+    }
+    else {
+        sprite.setColor({255, 255, 255, 255});
+    }
 
     renderTarget->draw(sprite);
     renderTarget->draw(textObject);
 }
 
-void StartButton::handleEvent(sf::Event event)  {
+void LevelButton::handleEvent(sf::Event event)  {
     if(event.type == sf::Event::MouseButtonPressed) {
-        notifyObservers("startButtonClicked");
+        notifyObservers("StartLevel"+std::to_string(levelNumber));
     }
 }
 
-void StartButton::update(sf::Time dt) {
+void LevelButton::update(sf::Time dt) {
 
 }
 
-sf::Rect<float> StartButton::getGlobalBounds() {
+sf::Rect<float> LevelButton::getGlobalBounds() {
     return sprite.getGlobalBounds();
 }
 
-void StartButton::setTextPosition() {
+void LevelButton::setTextPosition() {
     sf::FloatRect bounds = sprite.getGlobalBounds();
     sf::FloatRect textBounds = textObject.getGlobalBounds();
     textObject.setPosition(bounds.left + (bounds.width - textBounds.width) / 2,
-                              bounds.top + (bounds.height - textBounds.height) / 3);
+                           bounds.top + (bounds.height - textBounds.height) / 3);
 }

@@ -1,9 +1,16 @@
 #include "PageManager.h"
 #include "pages/welcomePage/WelcomePage.h"
+#include "pages/levelsPage/LevelsPage.h"
 
 PageManager::PageManager(sf::RenderTarget *renderTarget) : renderTarget(renderTarget){
+    // Create welcome Page
     auto welcomePage = new WelcomePage(renderTarget);
     addPage(welcomePage);
+
+    // Create Levels Page
+    auto levelsPage = new LevelsPage(renderTarget);
+    addPage(levelsPage);
+
     switchToPage(0);
 }
 
@@ -43,5 +50,8 @@ void PageManager::onEvent(const std::string &eventName) {
     // Handle events triggered by pages
     if(eventName == "startButtonClicked"){
         std::cout << "Switching to Levels' Page\n";
+        switchToPage(1);
     }
+    else
+        notifyObservers(eventName);
 }

@@ -1,19 +1,22 @@
 #include <iostream>
-#include "pages/welcomePage/WelcomePage.h"
-#include "pages/welcomePage/StartButton.h"
+#include "pages/levelsPage/LevelsPage.h"
+#include "pages/levelsPage/LevelButton.h"
 
-WelcomePage::WelcomePage(sf::RenderTarget *renderTarget): Page(renderTarget){
+LevelsPage::LevelsPage(sf::RenderTarget *renderTarget): Page(renderTarget){
     backgroundImage = new BackgroundImage(backgroundImagePath,
                                           (float)renderTarget->getSize().x,
                                           (float)renderTarget->getSize().y);
 
-    // Initialize Start Button
-    auto startButton = new StartButton();
-    startButton->addObserver(this);
-    addWidget(startButton);
+    // Get Available Level Numbers
+    std::vector<int> lvlNumbers{1,2,3,4,5};
+    for (auto num: lvlNumbers)
+        addWidget(new LevelButton(num));
+
+    for (auto& widget:widgets )
+        widget->addObserver(this);
 }
 
-void WelcomePage::render() {
+void LevelsPage::render() {
 
     // Render Background Image
     backgroundImage->render(renderTarget);
@@ -23,12 +26,12 @@ void WelcomePage::render() {
     }
 }
 
-void WelcomePage::update(const sf::Time &dt) {
+void LevelsPage::update(const sf::Time &dt) {
 
 }
 
-void WelcomePage::handleEvent(const sf::Event &ev, const sf::Vector2f &originCoords,
-                              const sf::Vector2f &mousePositionInView, float scaleFactor) {
+void LevelsPage::handleEvent(const sf::Event &ev, const sf::Vector2f &originCoords, const sf::Vector2f &mousePositionInView,
+                         float scaleFactor) {
     if(ev.type == sf::Event::Resized) {
         backgroundImage->handleImageResize(ev.size.width, ev.size.height);
     }
@@ -45,9 +48,6 @@ void WelcomePage::handleEvent(const sf::Event &ev, const sf::Vector2f &originCoo
 
 }
 
-void WelcomePage::onEvent(const std::string &eventName) {
-    if(eventName == "startButtonClicked")
-        notifyObservers("startButtonClicked");
-    else
+void LevelsPage::onEvent(const std::string &eventName) {
         notifyObservers(eventName);
 }
