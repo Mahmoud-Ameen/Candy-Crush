@@ -15,7 +15,7 @@ LevelButton::LevelButton(int levelNumber): levelNumber(levelNumber){
         std::cerr << "Error loading font from file: " << fontPath << std::endl;
     }
     textObject.setFont(font);
-    textObject.setString("Level " + std::to_string(levelNumber));
+    textObject.setString( std::to_string(levelNumber));
     textObject.setCharacterSize(40);
     textObject.setStyle(sf::Text::Bold);
     textObject.setFillColor(sf::Color::Black);

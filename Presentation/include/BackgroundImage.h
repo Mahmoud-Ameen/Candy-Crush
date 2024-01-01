@@ -57,6 +57,10 @@ public:
                                       float(targetHeight) - sprite.getGlobalBounds().height});
     }
 
+    void setOpacity(int opacity){
+        sprite.setColor(sf::Color(255,255,255,opacity));
+    }
+
 private:
     sf::Texture texture;
     sf::Sprite sprite;

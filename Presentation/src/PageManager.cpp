@@ -1,6 +1,7 @@
 #include "PageManager.h"
 #include "pages/welcomePage/WelcomePage.h"
 #include "pages/levelsPage/LevelsPage.h"
+#include "pages/GameplayPage/GameplayPage.h"
 
 PageManager::PageManager(sf::RenderTarget *renderTarget) : renderTarget(renderTarget){
     // Create welcome Page
@@ -20,7 +21,7 @@ void PageManager::addPage(Page* page) {
 }
 
 void PageManager::switchToPage(int index) {
-    if(index >= 0 && index < pages.size()){
+    if(index < pages.size()){
         pages[currentPageIndex]->setActive(false);
         currentPageIndex = index;
         pages[currentPageIndex]->setActive(true);
@@ -28,13 +29,13 @@ void PageManager::switchToPage(int index) {
 }
 
 void PageManager::renderPage() {
-    if (currentPageIndex >= 0 && currentPageIndex < pages.size()) {
+    if (currentPageIndex < pages.size()) {
         pages[currentPageIndex]->render();
     }
 }
 
 void PageManager::updatePage(const sf::Time &dt) {
-    if (currentPageIndex >= 0 && currentPageIndex < pages.size()) {
+    if (currentPageIndex < pages.size()) {
         pages[currentPageIndex]->update(dt);
     }
 }
@@ -51,6 +52,11 @@ void PageManager::onEvent(const std::string &eventName) {
     if(eventName == "startButtonClicked"){
         std::cout << "Switching to Levels' Page\n";
         switchToPage(1);
+    }
+    else if (eventName.rfind("StartLevel", 0) == 0) {
+        int levelNumber = std::stoi(eventName.substr(10,eventName.npos));
+        addPage(new GameplayPage(renderTarget));
+        switchToPage(2);
     }
     else
         notifyObservers(eventName);
