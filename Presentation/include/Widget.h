@@ -27,7 +27,7 @@ public:
      * Derived classes must implement this method to handle events relevant to the widget's functionality.
      * @param event The SFML event to be handled.
      */
-    virtual void handleEvent(sf::Event) = 0;
+    virtual void handleEvent(sf::Event ev, sf::Vector2f mousePosition) = 0;
 
     /**
      * @brief Updates the internal state of the widget.

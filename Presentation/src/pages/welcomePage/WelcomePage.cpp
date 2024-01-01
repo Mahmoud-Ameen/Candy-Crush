@@ -38,7 +38,7 @@ void WelcomePage::handleEvent(const sf::Event &ev, const sf::Vector2f &originCoo
         if(widget->getGlobalBounds().contains(mousePosition))
         {
             widget->setHovered(true);
-            widget->handleEvent(ev);
+            widget->handleEvent(ev, sf::Vector2f());
         }
         else widget->setHovered(false);
     }

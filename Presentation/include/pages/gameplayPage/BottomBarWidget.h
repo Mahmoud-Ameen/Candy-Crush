@@ -11,7 +11,7 @@ public:
     BottomBarWidget(int width, int height);
 
     void render(sf::RenderTarget *renderTarget) override;
-    void handleEvent(sf::Event) override;
+    void handleEvent(sf::Event ev, sf::Vector2f mousePosition) override;
     void update(sf::Time dt) override;
     sf::Rect<float> getGlobalBounds() override;
 

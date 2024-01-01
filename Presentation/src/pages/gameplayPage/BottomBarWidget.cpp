@@ -41,7 +41,7 @@ void BottomBarWidget::render(sf::RenderTarget *renderTarget) {
     renderTarget->draw(sprite);
 }
 
-void BottomBarWidget::handleEvent(sf::Event) {
+void BottomBarWidget::handleEvent(sf::Event ev, sf::Vector2f mousePosition) {
 
 }
 

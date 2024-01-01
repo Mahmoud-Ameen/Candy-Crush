@@ -3,6 +3,7 @@
 #include "pages/gameplayPage/LevelInfoWidget.h"
 #include "pages/gameplayPage/TopBarWidget.h"
 #include "pages/gameplayPage/BottomBarWidget.h"
+#include "pages/gameplayPage/Board.h"
 
 GameplayPage::GameplayPage(sf::RenderTarget *renderTarget): Page(renderTarget){
     backgroundImage = new BackgroundImage(backgroundImagePath,
@@ -12,8 +13,15 @@ GameplayPage::GameplayPage(sf::RenderTarget *renderTarget): Page(renderTarget){
     // Game State widgets
     auto  topBar = new TopBarWidget((int)renderTarget->getSize().x,160);
     auto  bottomBar = new BottomBarWidget((int)renderTarget->getSize().x,130);
+
+    float boardLength = std::min((float) renderTarget->getSize().x,
+                            (float)renderTarget->getSize().y-160-130);
+    auto board = new Board(boardLength,
+                           sf::Vector2f(renderTarget->getSize().x/2-boardLength/2,
+                                        150));
     addWidget(topBar);
     addWidget(bottomBar);
+    addWidget(board);
 
     // Observe events in sub-widgets
     for (auto& widget:widgets )
@@ -31,6 +39,9 @@ void GameplayPage::render() {
 }
 
 void GameplayPage::update(const sf::Time &dt) {
+    for (auto& widget: widgets) {
+        widget->update(dt);
+    }
 }
 
 void GameplayPage::handleEvent(const sf::Event &ev, const sf::Vector2f &originCoords,
@@ -45,7 +56,7 @@ void GameplayPage::handleEvent(const sf::Event &ev, const sf::Vector2f &originCo
         if(widget->getGlobalBounds().contains(mousePosition))
         {
             widget->setHovered(true);
-            widget->handleEvent(ev);
+            widget->handleEvent(ev, mousePosition);
         }
         else widget->setHovered(false);
     }

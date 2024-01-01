@@ -36,7 +36,7 @@ void StartButton::render(sf::RenderTarget* renderTarget) {
     renderTarget->draw(textObject);
 }
 
-void StartButton::handleEvent(sf::Event event)  {
+void StartButton::handleEvent(sf::Event event, sf::Vector2f mousePosition) {
     if(event.type == sf::Event::MouseButtonPressed) {
         notifyObservers("startButtonClicked");
     }

@@ -67,7 +67,7 @@ void LevelInfoWidget::render(sf::RenderTarget *renderTarget) {
     renderTarget->draw(sprite);
 }
 
-void LevelInfoWidget::handleEvent(sf::Event) {
+void LevelInfoWidget::handleEvent(sf::Event ev, sf::Vector2f mousePosition) {
 
 }
 

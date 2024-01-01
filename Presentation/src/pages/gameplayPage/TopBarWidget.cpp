@@ -30,7 +30,7 @@ void TopBarWidget::render(sf::RenderTarget *renderTarget) {
     renderTarget->draw(sprite);
 }
 
-void TopBarWidget::handleEvent(sf::Event) {
+void TopBarWidget::handleEvent(sf::Event ev, sf::Vector2f mousePosition) {
 
 }
 
