@@ -1,5 +1,6 @@
 #include "pages/gameplayPage/BottomBarWidget.h"
 #include "pages/gameplayPage/ObjectiveWidget.h"
+#include "../../../../BusinessLayer/public/GameController.h"
 
 
 BottomBarWidget::BottomBarWidget(int width, int height) {
@@ -14,14 +15,10 @@ BottomBarWidget::BottomBarWidget(int width, int height) {
     sprite.setTexture(texture);
 
     // Initialize Widgets
-    float widthWithPadding = 90;
-    objectives.emplace_back(Candy::red,26);
-    objectives.emplace_back(Candy::yellow,15);
-    objectives.emplace_back(Candy::blue,10);
-    float start = ((float)renderTexture.getSize().x - ((float)objectives.size()*widthWithPadding)) / 2.0f;
-    for (int i = 0; i < objectives.size(); i++) {
-        objectiveWidgets.push_back(new ObjectiveWidget(objectives[i], start + (float)i*widthWithPadding));
-    }
+
+    objectives = GameController::getInstance().getObjectives();
+    setObjectives(objectives);
+
 }
 
 void BottomBarWidget::render(sf::RenderTarget *renderTarget) {
@@ -35,7 +32,6 @@ void BottomBarWidget::render(sf::RenderTarget *renderTarget) {
     texture = renderTexture.getTexture();
     sprite.setTexture(texture);
 
-
     renderTexture.display();
 
     renderTarget->draw(sprite);
@@ -43,6 +39,19 @@ void BottomBarWidget::render(sf::RenderTarget *renderTarget) {
 
 void BottomBarWidget::handleEvent(sf::Event ev, sf::Vector2f mousePosition) {
 
+}
+
+void BottomBarWidget::setObjectives(std::vector<DTOs::ObjectiveInfo>& objs){
+    for (auto wid:objectiveWidgets)
+        delete wid;
+    objectiveWidgets.clear();
+
+    objectives = objs;
+    float widthWithPadding = 115;
+    float start = ((float)renderTexture.getSize().x - ((float)objectives.size()*widthWithPadding)) / 2.0f;
+    for (int i = 0; i < objectives.size(); i++) {
+        objectiveWidgets.push_back(new ObjectiveWidget(objectives[i], start + (float)i*widthWithPadding));
+    }
 }
 
 void BottomBarWidget::update(sf::Time dt) {

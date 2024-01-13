@@ -44,6 +44,7 @@ void LevelButton::render(sf::RenderTarget* renderTarget) {
 void LevelButton::handleEvent(sf::Event event, sf::Vector2f mousePosition) {
     if(event.type == sf::Event::MouseButtonPressed) {
         notifyObservers("StartLevel"+std::to_string(levelNumber));
+        musicPlayer.playANiceSong(false, 100);
     }
 }
 

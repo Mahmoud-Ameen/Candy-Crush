@@ -8,7 +8,8 @@ LevelsPage::LevelsPage(sf::RenderTarget *renderTarget): Page(renderTarget){
                                           (float)renderTarget->getSize().y);
 
     // Get Available Level Numbers
-    std::vector<int> lvlNumbers{1,2,3,4,5};
+    GameController& controller = GameController::getInstance();
+    std::vector<int> lvlNumbers = controller.getAvailableLevels();
     for (auto num: lvlNumbers)
         addWidget(new LevelButton(num));
 
@@ -33,7 +34,6 @@ void LevelsPage::update(const sf::Time &dt) {
 void LevelsPage::handleEvent(const sf::Event &ev, const sf::Vector2f &originCoords, const sf::Vector2f &mousePositionInView,
                          float scaleFactor) {
     if(ev.type == sf::Event::Resized) {
-        backgroundImage->handleImageResize(ev.size.width, ev.size.height);
     }
     for (auto& widget: widgets) {
         sf::Vector2f mousePosition {mousePositionInView.x-originCoords.x,mousePositionInView.y - originCoords.y};

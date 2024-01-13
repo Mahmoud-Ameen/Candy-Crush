@@ -14,7 +14,12 @@ public:
     void update(sf::Time dt) override;
     sf::Rect<float> getGlobalBounds() override;
 
+    void setRemainingMoves(int inputRemainingMoves);
+
+
 private:
+    int levelNumber;
+    int remainingMoves;
 
     sf::RenderTexture renderTexture;
     sf::Texture texture;
@@ -34,7 +39,7 @@ private:
 
     void setTextPosition();
 
-    void initTopBar(int height);
+    void initWidget(int height);
 };
 
 #endif //CANDYCRUSH_LEVELINFOWIDGET_H

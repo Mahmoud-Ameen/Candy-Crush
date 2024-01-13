@@ -2,6 +2,7 @@
 #define CANDYCRUSH_LEVELBUTTON_H
 
 #include "Widget.h"
+#include "MusicPlayer.h"
 
 class LevelButton : public Widget {
 public:
@@ -26,6 +27,8 @@ private:
     std::string imagePath = "../assets/btn-orange3.png";
 
     void setTextPosition();
+
+    MusicPlayer musicPlayer = {"../../assets/niceClick.mp3"};
 
 };
 

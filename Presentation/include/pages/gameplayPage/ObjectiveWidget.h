@@ -3,12 +3,12 @@
 
 #include <unordered_map>
 #include "Widget.h"
-#include "TemporaryDTOs.h"
 #include "BackgroundImage.h"
+#include "../../../../BusinessLayer/public/DTOs.h"
 
 class ObjectiveWidget{
 public:
-    explicit ObjectiveWidget(ObjectiveInfo objectiveInfo, int number);
+    explicit ObjectiveWidget(DTOs::ObjectiveInfo objectiveInfo, int number);
     void render(sf::RenderTarget *renderTarget);
     void update(sf::Time dt);
     void handleEvent(sf::Event);
@@ -16,7 +16,7 @@ public:
 
 private:
     int xPos;
-    std::unordered_map<Candy,std::string> imagePaths;
+    std::unordered_map<DTOs::CandyType,std::string> imagePaths;
 
     sf::Sprite containerSprite;
     sf::RenderTexture containerTexture;

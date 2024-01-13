@@ -30,7 +30,6 @@ void WelcomePage::update(const sf::Time &dt) {
 void WelcomePage::handleEvent(const sf::Event &ev, const sf::Vector2f &originCoords,
                               const sf::Vector2f &mousePositionInView, float scaleFactor) {
     if(ev.type == sf::Event::Resized) {
-        backgroundImage->handleImageResize(ev.size.width, ev.size.height);
     }
     for (auto& widget: widgets) {
         sf::Vector2f mousePosition {mousePositionInView.x-originCoords.x,mousePositionInView.y - originCoords.y};
@@ -46,8 +45,9 @@ void WelcomePage::handleEvent(const sf::Event &ev, const sf::Vector2f &originCoo
 }
 
 void WelcomePage::onEvent(const std::string &eventName) {
-    if(eventName == "startButtonClicked")
+    if(eventName == "startButtonClicked") {
         notifyObservers("startButtonClicked");
+    }
     else
         notifyObservers(eventName);
 }

@@ -21,7 +21,10 @@ private:
     sf::RenderWindow* window;
 
     // BackgroundImage
-    std::string backgroundImagePath = "../assets/background_2.jpg";
+    std::string backgroundImagePath =
+            //"../assets/video-game-candy-crush-soda-saga-wallpaper-preview.png";
+//            "../../assets/wp2347628-candy-crush-saga-wallpapers.jpg";
+                "../../assets/background4.jpg";
     BackgroundImage* backgroundImage;
 
     // Game Frame

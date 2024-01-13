@@ -3,6 +3,7 @@
 
 
 #include "Widget.h"
+#include "MusicPlayer.h"
 
 class StartButton: public Widget {
 public:

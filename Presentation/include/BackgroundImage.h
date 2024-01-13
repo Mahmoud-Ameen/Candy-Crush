@@ -22,7 +22,7 @@ public:
         if (!texture.loadFromFile(imagePath)) {
             std::cerr << "Error loading " << imagePath << "\n";
         }
-
+        texture.setSmooth(true);
         sprite.setTexture(texture);
         handleImageResize(targetWidth, targetHeight);
     }

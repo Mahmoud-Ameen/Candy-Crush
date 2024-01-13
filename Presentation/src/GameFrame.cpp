@@ -12,6 +12,9 @@ GameFrame::GameFrame(sf::RenderWindow *renderWindow):
     // Initialize PageManager
     pageManager = new PageManager(&renderTexture);
     pageManager->addObserver(this);
+
+    // Start Background Music
+    musicPlayer.playANiceSong(true, 20);
 }
 
 void GameFrame::render() {
@@ -56,5 +59,8 @@ void GameFrame::handleResize() {
 }
 
 void GameFrame::onEvent(const std::string &eventName) {
-
+    if(eventName == "muteMusic"){
+        musicPlayer.pauseTheNiceSong();
+    }else if(eventName == "playMusic")
+        musicPlayer.playANiceSong(true,20);
 }

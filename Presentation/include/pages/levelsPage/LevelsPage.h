@@ -3,6 +3,7 @@
 
 #include "Page.h"
 #include "BackgroundImage.h"
+#include "../../../../BusinessLayer/public/GameController.h"
 
 class LevelsPage: public Page{
 public:
@@ -15,7 +16,11 @@ public:
     void onEvent(const std::string &eventName) override;
 
 private:
-    std::string backgroundImagePath = "../assets/image.jpg";
+    std::string backgroundImagePath =
+            "../../assets/background4.jpg";
+//            "../../assets/Map_background.png";
+//            "../../assets/Map_background_tileable_3.jpg";
+//            "../../assets/Donut-Baby-Shower-Arched-Wall-Chiara-Backdrop-Cover-for-Kids-Candyland-theme-Birthday-Photo-Background-Doubleside.png";
     BackgroundImage* backgroundImage;
 
 };

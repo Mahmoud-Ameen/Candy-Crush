@@ -7,8 +7,9 @@ StartButton::StartButton(){
     if (!texture.loadFromFile(imagePath)) {
         std::cerr << "Error loading image from file: " << imagePath << std::endl;
     }
+    texture.setSmooth(true);
     sprite.setTexture(texture);
-
+//    sprite.setScale(0.75,0.75);
     // Load Font
     if(!font.loadFromFile(fontPath)){
         std::cerr << "Error loading font from file: " << fontPath << std::endl;
@@ -39,6 +40,7 @@ void StartButton::render(sf::RenderTarget* renderTarget) {
 void StartButton::handleEvent(sf::Event event, sf::Vector2f mousePosition) {
     if(event.type == sf::Event::MouseButtonPressed) {
         notifyObservers("startButtonClicked");
+//        musicPlayer.playANiceSong(false,100);
     }
 }
 

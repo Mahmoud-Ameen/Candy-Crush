@@ -1,6 +1,7 @@
 #include <iostream>
 #include "pages/gameplayPage/LevelInfoWidget.h"
 #include "BackgroundImage.h"
+#include "../../../../BusinessLayer/public/GameController.h"
 
 LevelInfoWidget::LevelInfoWidget(float height) {
     if(!texture.loadFromFile(imagePath)){
@@ -12,18 +13,18 @@ LevelInfoWidget::LevelInfoWidget(float height) {
     }
 
 
-    initTopBar(height);
-    renderTexture.create(260,185);
+    initWidget(height);
+    backgroundImage = new BackgroundImage(imagePath,260,height);
+
+    renderTexture.create(260,160);
     texture = renderTexture.getTexture();
     sprite.setTexture(texture);
     setTextPosition();
 }
 
-void LevelInfoWidget::initTopBar(int height) {
-    int levelNumber = 5;
-    int remainingMoves = 26;
-
-    backgroundImage = new BackgroundImage(imagePath,260,height);
+void LevelInfoWidget::initWidget(int height) {
+    levelNumber = GameController::getInstance().getCurrentLevelNumber();
+    remainingMoves = GameController::getInstance().getRemainingMoves();
     levelText = "Level " + std::to_string(levelNumber);
     levelTextObject.setString(levelText);
     levelTextObject.setFont(font);
@@ -46,7 +47,6 @@ void LevelInfoWidget::initTopBar(int height) {
 }
 
 void LevelInfoWidget::render(sf::RenderTarget *renderTarget) {
-
 
     renderTexture.clear(sf::Color::Transparent);
     backgroundImage->render(&renderTexture);
@@ -72,7 +72,8 @@ void LevelInfoWidget::handleEvent(sf::Event ev, sf::Vector2f mousePosition) {
 }
 
 void LevelInfoWidget::update(sf::Time dt) {
-
+    levelNumber = GameController::getInstance().getCurrentLevelNumber();
+    remainingMoves = GameController::getInstance().getRemainingMoves();
 }
 
 sf::Rect<float> LevelInfoWidget::getGlobalBounds() {
@@ -86,9 +87,14 @@ void LevelInfoWidget::setTextPosition() {
                            bounds.top + 10);
 
     movesTextObject.setPosition(bounds.left + (bounds.width - movesTextObject.getGlobalBounds().width) / 2,
-                                levelTextObject.getPosition().y + levelTextObject.getGlobalBounds().height + 10);
+                                levelTextObject.getPosition().y + levelTextObject.getGlobalBounds().height + 5);
 
     movesLabelTextObject.setPosition(bounds.left + (bounds.width - movesLabelTextObject.getGlobalBounds().width) / 2,
-                                movesTextObject.getPosition().y + movesTextObject.getGlobalBounds().height + 25);
+                                movesTextObject.getPosition().y + movesTextObject.getGlobalBounds().height + 15);
 
+}
+
+void LevelInfoWidget::setRemainingMoves(int inputRemainingMoves) {
+    remainingMoves = inputRemainingMoves;
+    movesTextObject.setString(std::to_string(remainingMoves));
 }

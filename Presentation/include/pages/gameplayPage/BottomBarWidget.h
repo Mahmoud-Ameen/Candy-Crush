@@ -2,7 +2,6 @@
 #define CANDYCRUSH_BOTTOMBARWIDGET_H
 
 #include "Widget.h"
-#include "TemporaryDTOs.h"
 #include "BackgroundImage.h"
 #include "ObjectiveWidget.h"
 
@@ -15,6 +14,7 @@ public:
     void update(sf::Time dt) override;
     sf::Rect<float> getGlobalBounds() override;
 
+    void setObjectives(std::vector<DTOs::ObjectiveInfo> &objs);
 private:
     sf::RenderTexture renderTexture;
     sf::Texture texture;
@@ -22,8 +22,9 @@ private:
     std::string imagePath = "../../assets/ObjectivesArea.png";
     BackgroundImage* backgroundImage;
 
-    std::vector<ObjectiveInfo> objectives;
+    std::vector<DTOs::ObjectiveInfo> objectives;
     std::vector<ObjectiveWidget*> objectiveWidgets;
+
 };
 
 

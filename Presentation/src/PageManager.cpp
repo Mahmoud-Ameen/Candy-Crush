@@ -22,9 +22,7 @@ void PageManager::addPage(Page* page) {
 
 void PageManager::switchToPage(int index) {
     if(index < pages.size()){
-        pages[currentPageIndex]->setActive(false);
         currentPageIndex = index;
-        pages[currentPageIndex]->setActive(true);
     }
 }
 
@@ -55,9 +53,17 @@ void PageManager::onEvent(const std::string &eventName) {
     }
     else if (eventName.rfind("StartLevel", 0) == 0) {
         int levelNumber = std::stoi(eventName.substr(10,eventName.npos));
+        GameController& controller = GameController::getInstance();
+        controller.startGame(levelNumber);
         addPage(new GameplayPage(renderTarget));
+        pages[2]->addObserver(this);
         switchToPage(2);
     }
-    else
-        notifyObservers(eventName);
+    else if (eventName == "HomeButtonClicked"){
+        if(pages.size() < 3) return;
+        pages[2] = nullptr;
+        pages.erase(pages.begin() + 2);
+        switchToPage(0);
+    }
+    notifyObservers(eventName);
 }

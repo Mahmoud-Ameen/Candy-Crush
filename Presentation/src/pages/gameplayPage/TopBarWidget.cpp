@@ -1,12 +1,8 @@
 #include "pages/GameplayPage/TopBarWidget.h"
 #include "BackgroundImage.h"
+#include "../../../../BusinessLayer/public/GameController.h"
 
 TopBarWidget::TopBarWidget(int width, int height) {
-    // TODO: Get Game State From Game Controller having Integrated
-    //       with the Business Layer
-    levelNumber = 1;
-    remainingMoves = 10;
-
     // Initialize Render Area
     renderTexture.create(width, height);
     backgroundImage = new BackgroundImage(imagePath, width, height - 50);
@@ -35,11 +31,13 @@ void TopBarWidget::handleEvent(sf::Event ev, sf::Vector2f mousePosition) {
 }
 
 void TopBarWidget::update(sf::Time dt) {
-
-    // Get remaining moves and update text
-
+    levelInfoWidget->update(dt);
 }
 
 sf::Rect<float> TopBarWidget::getGlobalBounds() {
     return sf::Rect<float>();
+}
+
+void TopBarWidget::setRemainingMoves(int remainingMoves) {
+    levelInfoWidget->setRemainingMoves(remainingMoves);
 }

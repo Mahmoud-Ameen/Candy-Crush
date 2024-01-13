@@ -3,6 +3,7 @@
 
 #include "Page.h"
 #include "BackgroundImage.h"
+#include "MusicPlayer.h"
 
 class WelcomePage: public Page{
 public:
@@ -15,9 +16,15 @@ public:
     void onEvent(const std::string &eventName) override;
 
 private:
-    std::string backgroundImagePath = "../assets/image.jpg";
+    std::string backgroundImagePath =
+    //            "../assets/image.jpg";
+//            "../../assets/wp2347628-candy-crush-saga-wallpapers.jpg";
+//    "../../assets/wp2347656-candy-crush-saga-wallpapers.png";
+    "../../assets/background4.jpg";
+
     BackgroundImage* backgroundImage;
 
+//    MusicPlayer musicPlayer = {"../../assets/welcome_music.mp3"};
 };
 
 #endif //CANDYCRUSH_WELCOMEPAGE_H

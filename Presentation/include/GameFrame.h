@@ -4,6 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "PageManager.h"
+#include "MusicPlayer.h"
 
 /**
  * @brief The GameFrame class represents the central frame/widget where screens(pages) would be rendered.
@@ -50,6 +51,8 @@ private:
     void handleResize();
 
     PageManager* pageManager;
+
+    MusicPlayer musicPlayer = {"../../assets/welcome_music.mp3"};
 };
 
 
