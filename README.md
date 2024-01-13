@@ -28,3 +28,16 @@ This project is a Candy Crush-like game implemented in C++ using the SFML librar
 
 ### Documentation
 For the project documents refer to `/docs` folder
+
+### Credits
+This project was made possible by the collaborative efforts of an amazing dedicated team. Special thanks to the following contributors:
+
+**Shady Ali (https://github.com/SHIXOOM)**
+
+**Ahmed Sameh (https://github.com/muha-0)**
+
+**Laila Khaled (https://github.com/laila078)**
+
+**Nour Hany**
+
+**Mahmoud Ashraf ((Me :D ))**
