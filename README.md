@@ -36,7 +36,7 @@ This project was made possible by the collaborative efforts of an amazing dedica
 
 **Ahmed Sameh (https://github.com/muha-0)**
 
-**Laila Khaled (https://github.com/laila078)**
+**Laila Khaled (https://github.com/laiilaK)**
 
 **Nour Hany**
 
